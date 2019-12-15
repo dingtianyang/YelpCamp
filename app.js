@@ -16,7 +16,9 @@ var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index")
 
-mongoose.connect('mongodb+srv://tianyang:Ilovetamu2019@cluster0-ngw3y.mongodb.net/test?retryWrites=true&w=majority', {
+var databaseurl = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v12"
+
+mongoose.connect(databaseurl, {
     useNewUrlParser : true,
     useCreateIndex: true,
     useUnifiedTopology: true
@@ -25,9 +27,6 @@ mongoose.connect('mongodb+srv://tianyang:Ilovetamu2019@cluster0-ngw3y.mongodb.ne
 }).catch(err => {
     console.log("ERROR:", err.message);
 });
-// mongoose.set('useNewUrlParser', true);
-// mongoose.set('useUnifiedTopology', true);
-// mongoose.connect("mongodb://localhost/yelp_camp_v12");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
