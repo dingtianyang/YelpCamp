@@ -21,7 +21,8 @@ var databaseurl = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v12"
 mongoose.connect(databaseurl, {
     useNewUrlParser : true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }).then(() => {
     console.log("Connected to DB!");
 }).catch(err => {
@@ -34,6 +35,8 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());  // should comes before passport config!!!
 // seedDB(); //seed the database
+
+app.locals.moment = require("moment");
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
